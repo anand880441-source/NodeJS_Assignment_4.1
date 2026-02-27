@@ -102,11 +102,11 @@ app.put("/states/:id", (req, res) => {
 });
 
 
-app.put('/states/:id/population', (req, res) => {
+app.put('/states/:id/annualBudget', (req, res) => {
   const state = states.find(s => s.id === parseInt(req.params.id));
   if (!state) return res.status(404).json({ message: "State not found" });
   
-  state.population = req.body.population;
+  state.annualBudget = req.body.annualBudget;
   res.status(200).json(state);
 });
 
