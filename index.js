@@ -79,34 +79,19 @@ app.put('/states/:id', (req, res) => {
   res.status(200).json(states[index]);
 });
 
-app.put("/states/:id", (req, res) => {
-  const stateId = Number(req.params.id);
-  const index = states.findIndex((s) => s.id === stateId);
-
-  if (index === -1)
-    return res.status(404).json({ message: "State not found" });
-
-  states[index] = {
-    id: stateId,
-    name: req.body.name,
-    population: req.body.population,
-    literacyRate: req.body.literacyRate,
-    annualBudget: req.body.annualBudget,
-    gdp: req.body.gdp,
-  };
-
-  res.status(200).json({
-    message: "State replaced successfully",
-    state: states[index],
-  });
-});
-
-
-app.put('/states/:id/annualBudget', (req, res) => {
+app.put('/states/:id/budget', (req, res) => {
   const state = states.find(s => s.id === parseInt(req.params.id));
   if (!state) return res.status(404).json({ message: "State not found" });
   
   state.annualBudget = req.body.annualBudget;
+  res.status(200).json(state);
+});
+
+app.put('/states/:id/population', (req, res) => {
+  const state = states.find(s => s.id === parseInt(req.params.id));
+  if (!state) return res.status(404).json({ message: "State not found" });
+  
+  state.population = req.body.population;
   res.status(200).json(state);
 });
 
